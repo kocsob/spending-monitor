@@ -1,0 +1,28 @@
+{
+  "name": "spending-monitor",
+  "version": "1.0.0",
+  "description": "SpendingMonitor NodeJS homework at Budapest University of Technology and Economics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kocsob/spending-monitor.git"
+  },
+  "keywords": [
+    "spending",
+    "monitor",
+    "node",
+    "homework"
+  ],
+  "author": "Balazs Kocso",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kocsob/spending-monitor/issues"
+  },
+  "homepage": "https://github.com/kocsob/spending-monitor#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
