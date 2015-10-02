@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 app.use('/public', express.static('public'));
+app.use('/favicon.ico', express.static('public/images/favicon.ico'));
 app.use(express.static('templates'));
 
 var server = app.listen(3000, function () {
