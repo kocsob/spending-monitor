@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-});
+app.use('/public', express.static('public'));
+app.use(express.static('templates'));
 
 var server = app.listen(3000, function () {
     var host = server.address().address;
