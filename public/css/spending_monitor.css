@@ -2,3 +2,23 @@
     font-size: 25px;
     cursor: pointer;
 }
+
+div .graph-image {
+    background: url(../images/graph.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 300px;
+    min-width: 300px;
+    max-height: 1000px;
+    max-width: 1000px;
+}
+
+.registration-form h1 {
+    margin-bottom: 25px;
+}
+
+.registration-form input {
+    margin-bottom: 10px;
+}
+
