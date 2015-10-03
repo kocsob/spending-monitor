@@ -21,30 +21,50 @@
             </ul>
 
             <form class="navbar-form navbar-right" method="GET" action="login.html">
-                <button class="btn btn-primary" type="submit">
-                    Log Out
+                <button class="btn btn-default" type="submit">
                     <span class="glyphicon glyphicon-log-out"></span>
+                    Log Out
                 </button>
             </form>
         </div> <!-- .container --->
     </nav>
+
     <div class="container">
         <form>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <div class="input-group">
-                        <input  id="datepicker" class="form-control" type="text" name="datepicker" readonly>
-                        <label class="input-group-addon btn" for="datepicker">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </label>
-                    </div> <!-- .input-group -->
-                </div> <!-- .col-xs-12 col-sm-6 -->
-                <div class="col-xs-12 col-sm-6">
-                    <div class="form-group">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="input-group">
+                            <input  id="datepicker" class="form-control" type="text" name="datepicker" readonly>
+                            <label class="input-group-addon btn" for="datepicker">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </label>
+                        </div> <!-- .input-group -->
+                    </div> <!-- .col-xs-12 col-sm-2 -->
+                    <div class="col-xs-12 col-sm-4">
                         <input class="form-control" type="text" placeholder="Add new item">
-                    </div> <!-- .form-group -->
-                </div> <!-- .col-xs-12 col-sm-6 -->
-            </div> <!-- .row -->
+                    </div> <!-- .col-xs-12 col-sm-4 -->
+                    <div class="col-xs-12 col-sm-3">
+                        <select class="form-control">
+                            <option value="food" >Food</option>
+                            <option value="medical">Medical</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other" selected>Other</option>
+                        </select>
+                    </div> <!-- .col-xs-12 col-sm-3 -->
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Amount">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                    Add
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </div> <!-- .input-group-btn -->
+                        </div> <!-- .input-group -->
+                    </div> <!-- .col-xs-12 col-sm-6 -->
+                </div> <!-- .row -->
+            </div> <!-- .form-group -->
         </form>
     </div> <!-- .container --->
 
