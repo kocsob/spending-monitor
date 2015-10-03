@@ -1,7 +1,15 @@
+/* COMMON */
+
 .navbar .navbar-brand {
     font-size: 25px;
     cursor: pointer;
 }
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: #D2E8F9;
+}
+
+/* LOGIN PAGE */
 
 div .graph-image {
     background: url(../images/graph.svg);
