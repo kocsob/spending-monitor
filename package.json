@@ -4,6 +4,8 @@
   "description": "SpendingMonitor NodeJS homework at Budapest University of Technology and Economics",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "postinstall": "node node_modules/bower/bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +25,7 @@
   },
   "homepage": "https://github.com/kocsob/spending-monitor#readme",
   "dependencies": {
+    "bower": "^1.6.2",
     "express": "^4.13.3"
   }
 }
