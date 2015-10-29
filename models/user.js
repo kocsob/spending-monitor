@@ -9,12 +9,26 @@ var User = function () {
  * An instance
  * @type {{id: number, name: string, email: string, pass: string}}
  */
-var UserInstanceMock = {
-    id: 1,
-    name: 'pistike',
-    email: 'pistike@vagyok.en',
-    pass: 'asdasd'
-};
+var UserInstanceMock = [
+    {
+        id: 1,
+        name: 'pistike',
+        email: 'pistike@vagyok.en',
+        pass: 'asdasd'
+    },
+    {
+        id: 2,
+        name: 'bela',
+        email: 'bela@vagyok.en',
+        pass: 'asdasd'
+    },
+    {
+        id: 2,
+        name: 'janos',
+        email: 'janos@vagyok.en',
+        pass: 'asdasd'
+    }
+];
 
 /**
  * Find one element with the criteria
@@ -25,7 +39,7 @@ var UserInstanceMock = {
 User.prototype.findOne = function (criteria, cb) {
 
     //returns 1 mocked item
-    return cb(null, UserInstanceMock);
+    return cb(null, UserInstanceMock[0]);
 };
 
 /**
@@ -37,7 +51,7 @@ User.prototype.findOne = function (criteria, cb) {
 User.prototype.find = function (criteria, cb) {
 
     //returns 3 mocked item
-    return cb(null, [UserInstanceMock, UserInstanceMock, UserInstanceMock]);
+    return cb(null, UserInstanceMock);
 };
 
 /**
