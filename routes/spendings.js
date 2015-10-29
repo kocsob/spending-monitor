@@ -1,6 +1,7 @@
 //Middlewares
 var renderMW = require('../middleware/general/render');
 var authMW = require('../middleware/authentication/auth');
+var getUserByIdMW = require('../middleware/user/getUserById');
 var getSpendingMW = require('../middleware/spending/getSpending');
 var addSpendingMW = require('../middleware/spending/addSpending');
 var modifySpendingMW = require('../middleware/spending/modifySpending');
@@ -13,12 +14,13 @@ var spendingModel = require('../models/spending');
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: new userModel,
+        spendingModel: new spendingModel
     };
 
     app.get('/spendings',
         authMW(objectRepository),
+        getUserByIdMW(objectRepository),
         renderMW(objectRepository, 'spendings')
     );
     app.get('/spendings/get',

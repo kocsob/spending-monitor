@@ -50,4 +50,4 @@ Spending.prototype.save = function (cb) {
     return cb(null, this);
 };
 
-module.exports.Spending = Spending;
+module.exports = Spending;

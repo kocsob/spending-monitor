@@ -8,8 +8,8 @@ var spendingModel = require('../models/spending');
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: new userModel,
+        spendingModel: new spendingModel
     };
 
     app.get('/',

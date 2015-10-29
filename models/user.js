@@ -11,8 +11,8 @@ var User = function () {
  */
 var UserInstanceMock = {
     id: 1,
-    name: 'Lorem',
-    email: 'lorem@example.org',
+    name: 'pistike',
+    email: 'pistike@vagyok.en',
     pass: 'asdasd'
 };
 
@@ -49,4 +49,4 @@ User.prototype.save = function (cb) {
     return cb(null, this);
 };
 
-module.exports.User = User;
+module.exports = User;

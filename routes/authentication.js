@@ -2,8 +2,8 @@
 var renderMW = require('../middleware/general/render');
 var authMW = require('../middleware/authentication/logout');
 var inverseAuthMW = require('../middleware/authentication/inverseAuth');
-var checkUserLoginMW = require('../middleware/authentication/checkUserLogin');
-var checkUserRegistrationMW = require('../middleware/registration/checkUserRegistration');
+var checkUserLoginMW = require('../middleware/user/checkUserLogin');
+var checkUserRegistrationMW = require('../middleware/user/checkUserRegistration');
 var logoutMW = require('../middleware/authentication/logout');
 
 //Models
@@ -13,8 +13,8 @@ var spendingModel = require('../models/spending');
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: new userModel,
+        spendingModel: new spendingModel
     };
 
     app.get('/login',

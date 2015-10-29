@@ -9,7 +9,7 @@
     <title>Index - SpendingMonitor</title>
 </head>
 <body>
-    <% include header_logged_in %>
+    <%- include('header_logged_in', {userName: user.name}) %>
     <div class="container">
         <form class="form-group">
             <div class="row">
