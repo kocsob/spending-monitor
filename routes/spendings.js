@@ -1,6 +1,6 @@
 //Middlewares
-var authMW = require('../middleware/general/auth');
 var renderMW = require('../middleware/general/render');
+var authMW = require('../middleware/authentication/auth');
 var getSpendingMW = require('../middleware/spending/getSpending');
 var addSpendingMW = require('../middleware/spending/addSpending');
 var modifySpendingMW = require('../middleware/spending/modifySpending');

@@ -14,7 +14,7 @@ app.use(function (req, res, next) {
  * Include all the routes
  */
 require('./routes/index')(app);
-require('./routes/login')(app);
+require('./routes/authentication')(app);
 require('./routes/registration')(app);
 require('./routes/spendings')(app);
 require('./routes/statements')(app);

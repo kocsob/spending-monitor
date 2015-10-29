@@ -1,7 +1,10 @@
 //Middlewares
 var renderMW = require('../middleware/general/render');
-var inverseAuthMW = require('../middleware/general/inverseAuth');
-var checkUserLoginMW = require('../middleware/login/checkUserLogin');
+var authMW = require('../middleware/authentication/logout');
+var inverseAuthMW = require('../middleware/authentication/inverseAuth');
+var checkUserLoginMW = require('../middleware/authentication/checkUserLogin');
+var checkUserRegistrationMW = require('../middleware/registration/checkUserRegistration');
+var logoutMW = require('../middleware/authentication/logout');
 
 //Models
 var userModel = require('../models/user');
@@ -22,5 +25,8 @@ module.exports = function (app) {
         inverseAuthMW(objectRepository),
         checkUserLoginMW(objectRepository)
     );
-
+    app.post('/logout',
+        authMW(objectRepository),
+        logoutMW(objectRepository)
+    )
 };
