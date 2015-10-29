@@ -8,7 +8,15 @@ module.exports = function (objectRepository) {
     var spendingModel = requireOption(objectRepository, 'spendingModel');
 
     return function (req, res, next) {
-        return res.json({});
+        //lets find the spendigns
+        spendingModel.find({ from : req.param('from'), to: req.param('to')}, function (err, result){
+            if (err){
+                return next(err);
+            }
+
+            res.json(result);
+        });
     };
+
 
 };
