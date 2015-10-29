@@ -20,7 +20,7 @@ require('./routes/spendings')(app);
 require('./routes/statements')(app);
 
 //Use the static MW
-app.use(express.static('templates'));
+app.use(express.static('static'));
 app.use('/public', express.static('public'));
 app.use('/favicon.ico', express.static('public/images/favicon.ico'));
 
