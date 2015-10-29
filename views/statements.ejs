@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="public/components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" type="text/css" href="public/css/spending_monitor.css">
+    <title>Statements - SpendingMonitor</title>
+</head>
+<body>
+    <% include header_logged_in %>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <form class="form form-inline">
+                                <label for="monthpicker">Choose a month: </label>
+                                <div class="input-group">
+                                    <input id="monthpicker" class="form-control" type="text" readonly>
+                                    <label class="input-group-addon btn" for="monthpicker">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </label>
+                                </div> <!-- .input-group -->
+                            </form>
+                        </div> <!-- .text-center -->
+                    </div> <!-- .panel-body -->
+                    <table class="table table-striped table-hover table-condensed table-responsive">
+                        <thead class="thead thead-inverse">
+                        <tr>
+                            <th>Category</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Food</td>           <td>1234</td></tr>
+                            <tr><td>Medical</td>        <td>567</td></tr>
+                            <tr><td>Entertainment</td>  <td>8910</td></tr>
+                            <tr><td>Other</td>          <td>111213</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            <b>Total amount of spending: 121924</b>
+                        </div> <!-- .text-center -->
+                    </div> <!-- .panel-footer -->
+                </div> <!-- .panel .panel-default -->
+            </div> <!-- .col-sm-12 .col-sm-8 .col-sm-offset-2 .col-lg-6 .col-lg-offset-3 -->
+        </div> <!-- .row -->
+    </div> <!-- .container --->
+
+    <script type="text/javascript" src="public/components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="public/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $("document").ready(function() {
+            var monthPicker = $('#monthpicker');
+            monthPicker.datepicker({
+                autoclose: true,
+                format: "yyyy.mm",
+                orientation: 'auto top',
+                viewMode: "months",
+                minViewMode: "months"
+            });
+            monthPicker.datepicker("setDate", new Date());
+        });
+    </script>
+</body>
+</html>

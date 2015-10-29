@@ -1,6 +1,6 @@
 //Middlewares
 var inverseAuthMW = require('../middleware/authentication/inverseAuth');
-var checkUserRegistrationMW = require('../middleware/authentication/checkUserRegistration');
+var checkUserRegistrationMW = require('../middleware/registration/checkUserRegistration');
 
 //Models
 var userModel = require('../models/user');

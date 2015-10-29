@@ -28,5 +28,5 @@ module.exports = function (app) {
     app.post('/logout',
         authMW(objectRepository),
         logoutMW(objectRepository)
-    )
+    );
 };

@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+app.set('view engine', 'ejs');
+
 /**
  * Let's create the .tpl and .error on the res object
  */

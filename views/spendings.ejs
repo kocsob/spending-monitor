@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="public/components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" type="text/css" href="public/css/spending_monitor.css">
+    <title>Index - SpendingMonitor</title>
+</head>
+<body>
+    <% include header_logged_in %>
+    <div class="container">
+        <form class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-2">
+                    <div class="input-group">
+                        <input  id="datepicker" class="form-control" type="text" name="datepicker" readonly>
+                        <label class="input-group-addon btn" for="datepicker">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </label>
+                    </div> <!-- .input-group -->
+                </div> <!-- .col-xs-12 .col-sm-2 -->
+                <div class="col-xs-12 col-sm-4">
+                    <input class="form-control" type="text" placeholder="Add new item">
+                </div> <!-- .col-xs-12 .col-sm-4 -->
+                <div class="col-xs-12 col-sm-3">
+                    <select class="form-control">
+                        <option value="food" >Food</option>
+                        <option value="medical">Medical</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="other" selected>Other</option>
+                    </select>
+                </div> <!-- .col-xs-12 .col-sm-3 -->
+                <div class="col-xs-12 col-sm-3">
+                    <div class="input-group">
+                        <input class="form-control" type="number" placeholder="Amount">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">
+                                Add
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </div> <!-- .input-group-btn -->
+                    </div> <!-- .input-group -->
+                </div> <!-- .col-xs-12 .col-sm-6 -->
+            </div> <!-- .row -->
+        </form>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="text-center">
+                    <form class="form form-inline">
+                        <label for="monthpicker">Choose a month: </label>
+                        <div class="input-group">
+                            <input id="monthpicker" class="form-control" type="text" readonly>
+                            <label class="input-group-addon btn" for="monthpicker">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </label>
+                        </div> <!-- .input-group -->
+                    </form>
+                </div> <!-- .text-center -->
+            </div> <!-- .panel-body -->
+            <table class="table table-striped table-hover table-condensed table-responsive">
+                <thead class="thead thead-inverse">
+                    <tr>
+                        <th>Date</th>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2015.10.01</td>   <td>Dinner</td>       <td>Food</td>       <td>10</td></tr>
+                    <tr><td>2015.10.01</td>   <td>Automobile</td>   <td>Other</td>      <td>1234</td></tr>
+                    <tr><td>2015.10.02</td>   <td>Lunch</td>        <td>Food</td>       <td>10</td></tr>
+                    <tr><td>2015.10.02</td>   <td>Books</td>        <td>Entertainment</td> <td>567</td></tr>
+                    <tr><td>2015.10.03</td>   <td>Medicine</td>     <td>Medical</td>    <td>89</td></tr>
+                    <tr><td>2015.10.04</td>   <td>Dinner</td>       <td>Food</td>       <td>10</td></tr>
+                    <tr><td>2015.10.05</td>   <td>Groceries</td>    <td>Food</td>       <td>567</td></tr>
+                </tbody>
+            </table>
+            <div class="panel-footer">
+                <div class="text-center">
+                    <b>Total amount of spending: 121924</b>
+                </div> <!-- .text-center -->
+            </div> <!-- .panel-footer -->
+        </div> <!-- .panel .panel-default -->
+    </div> <!-- .container --->
+
+    <script type="text/javascript" src="public/components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="public/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $("document").ready(function() {
+            var datePicker = $('#datepicker');
+            var monthPicker = $('#monthpicker');
+            datePicker.datepicker({
+                autoclose: true,
+                format: "yyyy.mm.dd",
+                orientation: 'auto top'
+            });
+            datePicker.datepicker("setDate", new Date());
+            monthPicker.datepicker({
+                autoclose: true,
+                format: "yyyy.mm",
+                orientation: 'auto top',
+                viewMode: "months",
+                minViewMode: "months"
+            });
+            monthPicker.datepicker("setDate", new Date());
+        });
+    </script>
+</body>
+</html>

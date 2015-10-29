@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="public/components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/css/spending_monitor.css">
+    <title>Login - SpendigMonitor</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="spendings">SpendingMonitor</a>
+            </div> <!-- .navbar-header -->
+
+            <form class="navbar-form navbar-right" method="GET" action="spendings">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Username">
+                    <input class="form-control" type="text" placeholder="Password">
+                </div> <!-- .form-group -->
+                <button class="btn btn-primary" type="submit">
+                    Log In
+                    <span class="glyphicon glyphicon-log-in"></span>
+                </button>
+            </form>
+        </div> <!-- .container --->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="graph-image hidden-xs col-sm-6"></div>
+            <div class="col-sm-6 registration-form">
+                <h1>Registration</h1>
+                <form class="form-group">
+                    <input class="form-control" type="text" placeholder="Username">
+                    <input class="form-control" type="text" placeholder="Email">
+                    <input class="form-control" type="text" placeholder="Password">
+                    <input class="form-control" type="text" placeholder="Re-type password">
+                    <button class="btn btn-primary" type="submit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        Register
+                    </button>
+                </form>
+            </div> <!-- .col-sm-6 .registration-form -->
+        </div> <!-- .row -->
+    </div> <!-- .container --->
+</body>
+
