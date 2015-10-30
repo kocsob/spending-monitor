@@ -32,3 +32,9 @@ div .graph-image {
 .registration-form button {
     margin-top: 10px;
 }
+
+/* SPENDING */
+
+.table .btn-group {
+    float: right;
+}
