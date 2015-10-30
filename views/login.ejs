@@ -14,10 +14,10 @@
                 <a class="navbar-brand" href="spendings">SpendingMonitor</a>
             </div> <!-- .navbar-header -->
 
-            <form class="navbar-form navbar-right" method="GET" action="spendings">
+            <form class="navbar-form navbar-right" action="/login" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Username" <% if (typeof username !== 'undefined' && typeof success !== 'undefined' && success == true) { %>value="<%= username%>" <% } %> >
-                    <input class="form-control" type="text" placeholder="Password">
+                    <input class="form-control" type="text" name="username" placeholder="Username" <% if (typeof username !== 'undefined' && typeof success !== 'undefined' && success == true) { %>value="<%= username%>" <% } %> >
+                    <input class="form-control" type="password" name="password" placeholder="Password">
                 </div> <!-- .form-group -->
                 <button class="btn btn-primary" type="submit">
                     Log In
@@ -27,6 +27,11 @@
         </div> <!-- .container --->
     </nav>
     <div class="container">
+        <% if (typeof error !== 'undefined' && typeof error.login !== 'undefined') { %>
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> <%= error.login %>
+            </div> <!-- .alert .alert-danger -->
+        <% } %>
         <% if (typeof success !== 'undefined' && success == true) { %>
             <div class="alert alert-success" role="alert">
                 <strong>Thank you for your registration!</strong> Now you can login with your username and password.

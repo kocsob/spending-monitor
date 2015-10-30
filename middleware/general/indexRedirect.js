@@ -7,7 +7,7 @@
 module.exports = function (objectRepository) {
 
     return function (req, res, next) {
-        res.redirect('/login');
+        return res.redirect('/login');
     };
 
 };
