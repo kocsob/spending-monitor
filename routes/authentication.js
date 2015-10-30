@@ -3,7 +3,6 @@ var renderMW = require('../middleware/general/render');
 var authMW = require('../middleware/authentication/logout');
 var inverseAuthMW = require('../middleware/authentication/inverseAuth');
 var checkUserLoginMW = require('../middleware/user/checkUserLogin');
-var checkUserRegistrationMW = require('../middleware/user/checkUserRegistration');
 var logoutMW = require('../middleware/authentication/logout');
 
 //Models

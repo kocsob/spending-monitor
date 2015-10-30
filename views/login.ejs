@@ -16,7 +16,7 @@
 
             <form class="navbar-form navbar-right" method="GET" action="spendings">
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Username">
+                    <input class="form-control" type="text" placeholder="Username" <% if (typeof username !== 'undefined' && typeof success !== 'undefined' && success == true) { %>value="<%= username%>" <% } %> >
                     <input class="form-control" type="text" placeholder="Password">
                 </div> <!-- .form-group -->
                 <button class="btn btn-primary" type="submit">
@@ -27,9 +27,11 @@
         </div> <!-- .container --->
     </nav>
     <div class="container">
-        <div class="alert alert-success" role="alert">
-            <strong>Thank you for your registration!</strong> Now you can login with your username and password.
-        </div> <!-- .alert .alert-success -->
+        <% if (typeof success !== 'undefined' && success == true) { %>
+            <div class="alert alert-success" role="alert">
+                <strong>Thank you for your registration!</strong> Now you can login with your username and password.
+            </div> <!-- .alert .alert-success -->
+        <% } %>
         <div class="row">
             <div class="graph-image hidden-xs col-sm-4 col-sm-offset-1"></div>
             <div class="col-sm-7 registration-form">
@@ -38,39 +40,79 @@
                         <h1>Registration</h1>
                     </div> <!-- .col-sm-offset-4 .col-sm-8 -->
                 </div> <!-- .row -->
-                <form class="form-horizontal">
-                    <div class="form-group has-error has-feedback">
-                        <label class="col-sm-4 control-label" for="reg-user">Username</label>
-                        <div class="col-sm-8">
-                            <input id="reg-user" class="form-control" type="text" name="username" placeholder="username">
-                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            <span class="help-block">Username is missing</span>
-                        </div> <!-- .col-sm-8 -->
-                    </div> <!-- .form-group .has-error .has-feedback -->
-                    <div class="form-group has-error has-feedback">
-                        <label class="col-sm-4 control-label" for="reg-email">Email</label>
-                        <div class="col-sm-8">
-                            <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com">
-                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            <span class="help-block">Email is missing</span>
-                        </div> <!-- .col-sm-8 -->
-                    </div> <!-- .form-group .has-error .has-feedback -->
-                    <div class="form-group has-error has-feedback">
-                        <label class="col-sm-4 control-label" for="reg-pass">Password</label>
-                        <div class="col-sm-8">
-                            <input id="reg-pass" class="form-control" type="password" name="password" placeholder="password">
-                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            <span class="help-block">Password is missing</span>
-                        </div> <!-- .col-sm-8 -->
-                    </div> <!-- .form-group .has-error .has-feedback -->
-                    <div class="form-group has-error has-feedback">
-                        <label class="col-sm-4 control-label" for="reg-retypepass">Re-type password</label>
-                        <div class="col-sm-8">
-                            <input id="reg-retypepass" class="form-control" type="password" name="retypepass" placeholder="re-type password">
-                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            <span class="help-block">Passwords don't match.</span>
-                        </div> <!-- .col-sm-8 -->
-                    </div> <!-- .form-group .has-error .has-feedback -->
+                <form class="form-horizontal"  action="/registration" method="POST">
+                    <% if (typeof error !== 'undefined' && typeof error.username !== 'undefined') { %>
+                        <div class="form-group has-error has-feedback">
+                            <label class="col-sm-4 control-label" for="reg-user">Username</label>
+                            <div class="col-sm-8">
+                                <input id="reg-user" class="form-control" type="text" name="username" placeholder="username" <% if (typeof username !== 'undefined') { %>value="<%= username%>" <% } %> >
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%= error.username %></span>
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group .has-error .has-feedback -->
+                    <% } else { %>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="reg-user">Username</label>
+                            <div class="col-sm-8">
+                                <input id="reg-user" class="form-control" type="text" name="username" placeholder="username" <% if (typeof username !== 'undefined') { %>value="<%= username%>" <% } %> >
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group -->
+                    <% } %>
+
+                    <% if (typeof error !== 'undefined' && typeof error.email !== 'undefined') { %>
+                        <div class="form-group has-error has-feedback">
+                            <label class="col-sm-4 control-label" for="reg-email">Email</label>
+                            <div class="col-sm-8">
+                                <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com" <% if (typeof email !== 'undefined') { %>value="<%= email%>" <% } %> >
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%= error.email %></span>
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group .has-error .has-feedback -->
+                    <% } else { %>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="reg-email">Email</label>
+                            <div class="col-sm-8">
+                                <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com" <% if (typeof email !== 'undefined') { %>value="<%= email%>" <% } %> >
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group -->
+                    <% } %>
+
+                    <% if (typeof error !== 'undefined' && typeof error.password !== 'undefined') { %>
+                        <div class="form-group has-error has-feedback">
+                            <label class="col-sm-4 control-label" for="reg-pass">Password</label>
+                            <div class="col-sm-8">
+                                <input id="reg-pass" class="form-control" type="password" name="password" placeholder="password">
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%= error.password %></span>
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group .has-error .has-feedback -->
+                    <% } else { %>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="reg-pass">Password</label>
+                            <div class="col-sm-8">
+                                <input id="reg-pass" class="form-control" type="password" name="password" placeholder="password">
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group -->
+                    <% } %>
+
+                    <% if (typeof error !== 'undefined' && typeof error.retypepass !== 'undefined') { %>
+                        <div class="form-group has-error has-feedback">
+                            <label class="col-sm-4 control-label" for="reg-retypepass">Re-type password</label>
+                            <div class="col-sm-8">
+                                <input id="reg-retypepass" class="form-control" type="password" name="retypepass" placeholder="re-type password">
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="help-block"><%= error.retypepass %></span>
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group .has-error .has-feedback -->
+                    <% } else { %>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="reg-retypepass">Re-type password</label>
+                            <div class="col-sm-8">
+                                <input id="reg-retypepass" class="form-control" type="password" name="retypepass" placeholder="re-type password">
+                            </div> <!-- .col-sm-8 -->
+                        </div> <!-- .form-group -->
+                    <% } %>
+
                     <div class="row">
                         <div class="col-sm-offset-4 col-sm-8">
                             <button class="btn btn-primary" type="submit">

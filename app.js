@@ -1,13 +1,17 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 /**
  * Let's create the .tpl and .error on the res object
  */
 app.use(function (req, res, next) {
-    res.error = [];
+    //res.error = [];
     res.tpl = {};
     return next();
 });
