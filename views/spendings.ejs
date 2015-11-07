@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="spendingsApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/spending_monitor.css">
     <title>Index - SpendingMonitor</title>
 </head>
-<body>
+<body ng-controller="spendingsCtrl">
     <%- include('header_logged_in', {userName: user.name}) %>
     <div class="container">
         <form class="form-group">
@@ -70,79 +70,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>2015.10.01</td>   <td>Dinner</td>       <td>Food</td>       <td>10</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div> <!-- .btn-group -->
-                        </td>
-                    </tr>
-                    <tr><td>2015.10.01</td>   <td>Automobile</td>   <td>Other</td>      <td>1234</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div> <!-- .btn-group -->
-                        </td>
-                    </tr>
-                    <tr><td>2015.10.02</td>   <td>Lunch</td>        <td>Food</td>       <td>10</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div> <!-- .btn-group -->
-                        </td>
-                    </tr>
-                    <tr><td>2015.10.02</td>   <td>Books</td>        <td>Entertainment</td> <td>567</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div> <!-- .btn-group -->
-                        </td>
-                    </tr>
-                    <tr><td>2015.10.03</td>   <td>Medicine</td>     <td>Medical</td>    <td>89</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div> <!-- .btn-group -->
-                        </td>
-                    </tr>
-                    <tr><td>2015.10.04</td>   <td>Dinner</td>       <td>Food</td>       <td>10</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                            </div> <!-- .btn-group -->
-                        </td>
-                    </tr>
-                    <tr><td>2015.10.05</td>   <td>Groceries</td>    <td>Food</td>       <td>567</td>
+                    <tr ng-repeat="spending in spendings">
+                        <td>{{ spending.date }}</td>
+                        <td>{{ spending.item }}</td>
+                        <td>{{ spending.category }}</td>
+                        <td>{{ spending.amount }}</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <button class="btn btn-sm btn-default" type="button">
@@ -166,6 +98,8 @@
 
     <script type="text/javascript" src="public/components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="public/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="public/components/angular/angular.js"></script>
+    <script type="text/javascript" src="public/js/spendings.js"></script>
     <script type="text/javascript">
         $("document").ready(function() {
             var datePicker = $('#datepicker');
