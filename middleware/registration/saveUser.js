@@ -1,3 +1,4 @@
+var bcrypt = require('bcryptjs');
 var requireOption = require('../common').requireOption;
 
 /**
@@ -23,10 +24,11 @@ module.exports = function (objectRepository) {
         }
 
         // Save the new user
+        var hash = bcrypt.hashSync(password, 10);
         var user = new userModel({
             username: username,
             email: email,
-            password: password
+            password: hash
         });
         user.save(function (err) {
             if (err) {

@@ -1,3 +1,4 @@
+var bcrypt = require('bcryptjs');
 var requireOption = require('../common').requireOption;
 
 /**
@@ -43,7 +44,7 @@ module.exports = function (objectRepository) {
             }
 
             // Check password
-            if (result.password !== password) {
+            if (!bcrypt.compareSync(password, result.password)) {
                 res.tpl.error.login = "Username or Password is incorrect!";
                 res.tpl.loginname = username;
                 return next();
