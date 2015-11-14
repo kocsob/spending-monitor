@@ -22,6 +22,14 @@ module.exports = function (objectRepository) {
             error.username = "Username is missing.";
         }
 
+        /*
+        userModel.findOne({
+            username: username
+        }, function (err, result) {
+            // Check user existence
+        });
+        */
+
         // Check email
         if (typeof email === 'undefined' || !email) {
             error.email = "Email is missing.";
@@ -51,6 +59,17 @@ module.exports = function (objectRepository) {
 
         // Check success
         if (Object.keys(error).length == 0) {
+            var user = new userModel({
+                username: username,
+                email: email,
+                password: password
+            });
+            user.save(function (err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+
             res.tpl.success = true;
             res.tpl.username = username;
         } else {

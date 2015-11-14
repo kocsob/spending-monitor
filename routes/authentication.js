@@ -12,7 +12,7 @@ var spendingModel = require('../models/spending');
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: new userModel,
+        userModel: userModel,
         spendingModel: new spendingModel
     };
 
