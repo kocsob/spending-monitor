@@ -1,11 +1,38 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+
 var app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+/**
+ * Serve static before session
+ */
+app.use('/public', express.static('public'));
+app.use('/favicon.ico', express.static('public/images/favicon.ico'));
+
+/**
+ * Session above all
+ */
+app.use(session({
+    secret: 'ewNR8kv2U0UmpbsdsqkJkbAWcZby7U6QfxfM5vaRgstBNID1PFOP569NKdUBjC3z',
+    cookie: {
+        maxAge: null
+    },
+    resave: true,
+    saveUninitialized: false
+}));
+
+/**
+ * Parse parameters in POST
+ */
+// for parsing application/json
+app.use(bodyParser.json());
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 /**
  * Let's create the .tpl and .error on the res object
@@ -29,8 +56,7 @@ require('./routes/statements')(app);
  * Use the static MW
  */
 app.use(express.static('static'));
-app.use('/public', express.static('public'));
-app.use('/favicon.ico', express.static('public/images/favicon.ico'));
+
 
 /**
  * Standard error handler

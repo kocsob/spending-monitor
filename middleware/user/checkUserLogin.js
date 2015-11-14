@@ -50,6 +50,9 @@ module.exports = function (objectRepository) {
                 return next();
             }
 
+            // Save the user ID to the session
+            req.session.userId = result._id;
+
             return res.redirect('/spendings');
         });
     };

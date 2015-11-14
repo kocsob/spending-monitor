@@ -11,10 +11,10 @@
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="spendings">SpendingMonitor</a>
+                <a class="navbar-brand" href="/">SpendingMonitor</a>
             </div> <!-- .navbar-header -->
 
-            <form class="navbar-form navbar-right" action="/login" method="POST">
+            <form class="navbar-form navbar-right" method="POST" action="/login">
                 <div class="form-group">
                     <input class="form-control" type="text" name="username" placeholder="Username" <% if (typeof loginname !== 'undefined') { %>value="<%= loginname %>" <% } %> >
                     <input class="form-control" type="password" name="password" placeholder="Password">
@@ -45,7 +45,7 @@
                         <h1>Registration</h1>
                     </div> <!-- .col-sm-offset-4 .col-sm-8 -->
                 </div> <!-- .row -->
-                <form class="form-horizontal"  action="/registration" method="POST">
+                <form class="form-horizontal" method="POST" action="/registration">
                     <% if (typeof error !== 'undefined' && typeof error.username !== 'undefined') { %>
                         <div class="form-group has-error has-feedback">
                             <label class="col-sm-4 control-label" for="reg-user">Username</label>

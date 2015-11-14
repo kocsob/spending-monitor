@@ -1,24 +1,24 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="spendings">SpendingMonitor</a>
+            <a class="navbar-brand" href="/">SpendingMonitor</a>
         </div> <!-- .navbar-header -->
 
         <ul class="nav navbar-nav">
             <% if (viewName === 'spendings') { %>
-                <li class="active"><a href="spendings">Spendings</a></li>
+                <li class="active"><a href="/spendings">Spendings</a></li>
             <% } else { %>
-                <li><a href="spendings">Spendings</a></li>
+                <li><a href="/spendings">Spendings</a></li>
             <% } %>
 
             <% if (viewName === 'statements') { %>
-                <li class="active"><a href="statements">Statements</a></li>
+                <li class="active"><a href="/statements">Statements</a></li>
             <% } else { %>
-                <li><a href="statements">Statements</a></li>
+                <li><a href="/statements">Statements</a></li>
             <% } %>
         </ul>
 
-        <form class="navbar-form navbar-right" method="GET" action="login">
+        <form class="navbar-form navbar-right" method="POST" action="/logout">
             <button class="btn btn-default" type="submit">
                 <span class="glyphicon glyphicon-log-out"></span>
                 Log Out
@@ -27,7 +27,7 @@
 
         <div class="navbar-text navbar-right">
             <span class="glyphicon glyphicon-user"></span>
-            <%= userName %>
+            <%= username %>
         </div> <!-- .navbar-text .navbar-right -->
     </div> <!-- .container --->
 </nav>
