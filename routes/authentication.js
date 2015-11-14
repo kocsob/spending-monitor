@@ -22,7 +22,8 @@ module.exports = function (app) {
     );
     app.post('/login',
         inverseAuthMW(objectRepository),
-        checkUserLoginMW(objectRepository)
+        checkUserLoginMW(objectRepository),
+        renderMW(objectRepository, 'login')
     );
     app.post('/logout',
         authMW(objectRepository),

@@ -10,28 +10,48 @@ module.exports = function (objectRepository) {
     var userModel = requireOption(objectRepository, 'userModel');
 
     return function (req, res, next) {
-        var error = false;
+        res.tpl.error = res.tpl.error || {};
         var username = req.body.username;
         var password = req.body.password;
-        console.log(username, password);
 
         // Check username
         if (typeof username === 'undefined' || !username) {
-            error = true;
+            res.tpl.error.login = "Username or Password is incorrect!";
+            return next();
         }
 
         // Check password
         if (typeof password === 'undefined' || !password) {
-            error = true;
-        }
-        console.log(error);
-
-        if (error == true) {
-            res.tpl.error = {login: "Username or Password is incorrect!"};
-            return res.render('login', res.tpl);
+            res.tpl.error.login = "Username or Password is incorrect!";
+            res.tpl.loginname = username;
+            return next();
         }
 
-        return res.redirect('/spendings');
+        // Find user by username in the DB
+        userModel.findOne({
+            username: username
+        }, function (err, result) {
+            if (err) {
+                console.log(err);
+                return res.status(500).send('Internal server error!');
+            }
+
+            // Check username existence in the DB
+            if (!result) {
+                res.tpl.error.login = "Username or Password is incorrect!";
+                res.tpl.loginname = username;
+                return next();
+            }
+
+            // Check password
+            if (result.password !== password) {
+                res.tpl.error.login = "Username or Password is incorrect!";
+                res.tpl.loginname = username;
+                return next();
+            }
+
+            return res.redirect('/spendings');
+        });
     };
 
 };

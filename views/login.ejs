@@ -16,7 +16,7 @@
 
             <form class="navbar-form navbar-right" action="/login" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="username" placeholder="Username" <% if (typeof loginname !== 'undefined' && typeof success !== 'undefined' && success == true) { %>value="<%= loginname%>" <% } %> >
+                    <input class="form-control" type="text" name="username" placeholder="Username" <% if (typeof loginname !== 'undefined') { %>value="<%= loginname %>" <% } %> >
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div> <!-- .form-group -->
                 <button class="btn btn-primary" type="submit">
@@ -50,7 +50,7 @@
                         <div class="form-group has-error has-feedback">
                             <label class="col-sm-4 control-label" for="reg-user">Username</label>
                             <div class="col-sm-8">
-                                <input id="reg-user" class="form-control" type="text" name="username" placeholder="username" <% if (typeof username !== 'undefined') { %>value="<%= username%>" <% } %> >
+                                <input id="reg-user" class="form-control" type="text" name="username" placeholder="username" <% if (typeof username !== 'undefined') { %>value="<%= username %>" <% } %> >
                                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 <span class="help-block"><%= error.username %></span>
                             </div> <!-- .col-sm-8 -->
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="reg-user">Username</label>
                             <div class="col-sm-8">
-                                <input id="reg-user" class="form-control" type="text" name="username" placeholder="username" <% if (typeof username !== 'undefined') { %>value="<%= username%>" <% } %> >
+                                <input id="reg-user" class="form-control" type="text" name="username" placeholder="username" <% if (typeof username !== 'undefined') { %>value="<%= username %>" <% } %> >
                             </div> <!-- .col-sm-8 -->
                         </div> <!-- .form-group -->
                     <% } %>
@@ -68,7 +68,7 @@
                         <div class="form-group has-error has-feedback">
                             <label class="col-sm-4 control-label" for="reg-email">Email</label>
                             <div class="col-sm-8">
-                                <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com" <% if (typeof email !== 'undefined') { %>value="<%= email%>" <% } %> >
+                                <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com" <% if (typeof email !== 'undefined') { %>value="<%= email %>" <% } %> >
                                 <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 <span class="help-block"><%= error.email %></span>
                             </div> <!-- .col-sm-8 -->
@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="reg-email">Email</label>
                             <div class="col-sm-8">
-                                <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com" <% if (typeof email !== 'undefined') { %>value="<%= email%>" <% } %> >
+                                <input id="reg-email" class="form-control" type="email" name="email" placeholder="email@example.com" <% if (typeof email !== 'undefined') { %>value="<%= email %>" <% } %> >
                             </div> <!-- .col-sm-8 -->
                         </div> <!-- .form-group -->
                     <% } %>
