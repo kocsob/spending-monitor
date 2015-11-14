@@ -30,15 +30,15 @@ module.exports = function (objectRepository) {
         });
         user.save(function (err) {
             if (err) {
-                console.log(err);
+                next(err);
             }
+
+            // Registration succeeded and fill the login name
+            res.tpl.success = true;
+            res.tpl.loginname = username;
+
+            return next();
         });
-
-        // Registration succeeded and fill the login name
-        res.tpl.success = true;
-        res.tpl.loginname = username;
-
-        return next();
     };
 
 };

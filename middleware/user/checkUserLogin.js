@@ -32,8 +32,7 @@ module.exports = function (objectRepository) {
             username: username
         }, function (err, result) {
             if (err) {
-                console.log(err);
-                return res.status(500).send('Internal server error!');
+                next(err);
             }
 
             // Check username existence in the DB
