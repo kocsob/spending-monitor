@@ -1,6 +1,9 @@
 //Middlewares
 var inverseAuthMW = require('../middleware/authentication/inverseAuth');
-var checkUserRegistrationMW = require('../middleware/user/checkUserRegistration');
+var checkUsernameMW = require('../middleware/registration/checkUsername');
+var checkEmailMW = require('../middleware/registration/checkEmail');
+var checkPasswordMW = require('../middleware/registration/checkPassword');
+var saveUserMW = require('../middleware/registration/saveUser');
 var renderMW = require('../middleware/general/render');
 
 //Models
@@ -16,7 +19,10 @@ module.exports = function (app) {
 
     app.post('/registration',
         inverseAuthMW(objectRepository),
-        checkUserRegistrationMW(objectRepository),
+        checkUsernameMW(objectRepository),
+        checkEmailMW(objectRepository),
+        checkPasswordMW(objectRepository),
+        saveUserMW(objectRepository),
         renderMW(objectRepository, 'login')
     );
 

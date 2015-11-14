@@ -16,7 +16,7 @@
 
             <form class="navbar-form navbar-right" action="/login" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="username" placeholder="Username" <% if (typeof username !== 'undefined' && typeof success !== 'undefined' && success == true) { %>value="<%= username%>" <% } %> >
+                    <input class="form-control" type="text" name="username" placeholder="Username" <% if (typeof loginname !== 'undefined' && typeof success !== 'undefined' && success == true) { %>value="<%= loginname%>" <% } %> >
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div> <!-- .form-group -->
                 <button class="btn btn-primary" type="submit">
