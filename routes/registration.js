@@ -14,7 +14,7 @@ module.exports = function (app) {
 
     var objectRepository = {
         userModel: userModel,
-        spendingModel: new spendingModel
+        spendingModel: spendingModel
     };
 
     app.post('/registration',

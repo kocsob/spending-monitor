@@ -11,21 +11,21 @@
 <body ng-controller="spendingsCtrl">
     <%- include('header_logged_in', {username: user.username}) %>
     <div class="container">
-        <form class="form-group">
+        <form class="form-group" method="POST" action="/spendings/add">
             <div class="row">
                 <div class="col-xs-12 col-sm-2">
                     <div class="input-group">
-                        <input  id="datepicker" class="form-control datepicker" type="text" name="datepicker" readonly>
+                        <input  id="datepicker" class="form-control datepicker" type="text" name="date" readonly>
                         <label class="input-group-addon btn" for="datepicker">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </label>
                     </div> <!-- .input-group -->
                 </div> <!-- .col-xs-12 .col-sm-2 -->
                 <div class="col-xs-12 col-sm-4">
-                    <input class="form-control" type="text" placeholder="Add new item">
+                    <input class="form-control" type="text" name="item" placeholder="Add new item">
                 </div> <!-- .col-xs-12 .col-sm-4 -->
                 <div class="col-xs-12 col-sm-3">
-                    <select class="form-control">
+                    <select class="form-control" name="category">
                         <option value="food" >Food</option>
                         <option value="medical">Medical</option>
                         <option value="entertainment">Entertainment</option>
@@ -34,7 +34,7 @@
                 </div> <!-- .col-xs-12 .col-sm-3 -->
                 <div class="col-xs-12 col-sm-3">
                     <div class="input-group">
-                        <input class="form-control" type="number" placeholder="Amount">
+                        <input class="form-control" type="number" name="amount" placeholder="Amount">
                         <div class="input-group-btn">
                             <button class="btn btn-primary" type="submit">
                                 Add
