@@ -22,11 +22,12 @@ module.exports = function (objectRepository) {
             amount: req.body.amount,
             _owner: req.session.userId
         });
-        spending.save(function(err) {
+        spending.save(function(err, spending) {
             if (err) {
                 next(err);
             }
-            return res.status(200).end();
+
+            return res.json({ _id: spending._id });
         });
     };
 

@@ -3,40 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="public/components/angular/angular-csp.css">
     <link rel="stylesheet" type="text/css" href="public/components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
     <link rel="stylesheet" type="text/css" href="public/css/spending_monitor.css">
     <title>Index - SpendingMonitor</title>
 </head>
 <body ng-controller="spendingsCtrl">
     <%- include('header_logged_in', {username: user.username}) %>
     <div class="container">
-        <form class="form-group" method="POST" action="/spendings/add">
+        <div class="form-group">
             <div class="row">
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-xs-12 col-sm-3">
                     <div class="input-group">
-                        <input  id="datepicker" class="form-control datepicker" type="text" name="date" readonly>
-                        <label class="input-group-addon btn" for="datepicker">
+                        <input class="form-control" uib-datepicker-popup="yyyy.MM.dd" is-open="status.datePickerOpened" ng-model="formdata.date" ng-click="openDatePicker($event)" readonly />
+                        <label class="input-group-addon btn" ng-click="openDatePicker($event)">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </label>
                     </div> <!-- .input-group -->
                 </div> <!-- .col-xs-12 .col-sm-2 -->
+
                 <div class="col-xs-12 col-sm-4">
-                    <input class="form-control" type="text" name="item" placeholder="Add new item">
+                    <input class="form-control" ng-model="formdata.item" type="text" placeholder="Add new item">
                 </div> <!-- .col-xs-12 .col-sm-4 -->
-                <div class="col-xs-12 col-sm-3">
-                    <select class="form-control" name="category">
-                        <option value="food" >Food</option>
-                        <option value="medical">Medical</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="other" selected>Other</option>
+
+                <div class="col-xs-12 col-sm-2">
+                    <select class="form-control" ng-model="formdata.category">
+                        <option value="Food" >Food</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Other" selected>Other</option>
                     </select>
                 </div> <!-- .col-xs-12 .col-sm-3 -->
+
                 <div class="col-xs-12 col-sm-3">
                     <div class="input-group">
-                        <input class="form-control" type="number" name="amount" placeholder="Amount">
+                        <input class="form-control" ng-model="formdata.amount" type="number" placeholder="Amount" />
                         <div class="input-group-btn">
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" ng-click="addSpending()">
                                 Add
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
@@ -44,22 +47,23 @@
                     </div> <!-- .input-group -->
                 </div> <!-- .col-xs-12 .col-sm-6 -->
             </div> <!-- .row -->
-        </form>
+        </div> <!-- .form-group -->
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="text-center">
-                    <form class="form form-inline">
+                    <div class="form-inline">
                         <label for="monthpicker">Choose a month: </label>
                         <div class="input-group">
-                            <input id="monthpicker" class="form-control" type="text" readonly>
-                            <label class="input-group-addon btn" for="monthpicker">
+                            <input class="form-control" uib-datepicker-popup="yyyy.MM" datepicker-mode="'month'" min-mode="'month'" is-open="status.monthPickerOpened" ng-model="spendingMonth" ng-change="monthChanged()" ng-click="openMonthPicker($event)" readonly />
+                            <label class="input-group-addon btn" ng-click="openMonthPicker($event)">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </label>
                         </div> <!-- .input-group -->
-                    </form>
+                    </div> <!-- .form-inline -->
                 </div> <!-- .text-center -->
             </div> <!-- .panel-body -->
-            <table class="table table-striped table-hover table-condensed table-responsive">
+
+            <table class="table table-striped table-hover table-condensed table-responsive" ng-cloak>
                 <thead class="thead thead-inverse">
                     <tr>
                         <th>Date</th>
@@ -70,17 +74,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="spending in spendings">
-                        <td>{{ spending.date }}</td>
+                    <tr ng-repeat="spending in spendings track by spending._id">
+                        <td>{{ spending.date | date:'yyyy.MM.dd'}}</td>
                         <td>{{ spending.item }}</td>
                         <td>{{ spending.category }}</td>
                         <td>{{ spending.amount }}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-default" type="button">
+                                <button class="btn btn-sm btn-default">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
-                                <button class="btn btn-sm btn-default" type="button">
+                                <button class="btn btn-sm btn-default" ng-click="deleteSpending(spending)">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </div> <!-- .btn-group -->
@@ -88,37 +92,18 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="panel-footer">
+
+            <div class="panel-footer" ng-cloak>
                 <div class="text-center">
-                    <b>Total amount of spending: 121924</b>
+                    <b>Total amount of spending: {{ total_amount }}</b>
                 </div> <!-- .text-center -->
             </div> <!-- .panel-footer -->
         </div> <!-- .panel .panel-default -->
     </div> <!-- .container --->
 
-    <script type="text/javascript" src="public/components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="public/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="public/components/angular/angular.js"></script>
+    <script type="text/javascript" src="public/components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="public/components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="public/js/spendings.js"></script>
-    <script type="text/javascript">
-        $("document").ready(function() {
-            var datePicker = $('#datepicker');
-            var monthPicker = $('#monthpicker');
-            datePicker.datepicker({
-                autoclose: true,
-                format: "yyyy.mm.dd",
-                orientation: 'auto top'
-            });
-            datePicker.datepicker("setDate", new Date());
-            monthPicker.datepicker({
-                autoclose: true,
-                format: "yyyy.mm",
-                orientation: 'auto top',
-                viewMode: "months",
-                minViewMode: "months"
-            });
-            monthPicker.datepicker("setDate", new Date());
-        });
-    </script>
 </body>
 </html>
