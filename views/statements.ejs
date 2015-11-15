@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="statementsApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="public/components/angular/angular-csp.css">
     <link rel="stylesheet" type="text/css" href="public/components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
     <link rel="stylesheet" type="text/css" href="public/css/spending_monitor.css">
     <title>Statements - SpendingMonitor</title>
 </head>
-<body>
+<body ng-controller="statementsCtrl">
     <%- include('header_logged_in', {username: user.username}) %>
     <div class="container">
         <div class="row">
@@ -16,18 +16,19 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="text-center">
-                            <form class="form form-inline">
+                            <div class="form-inline">
                                 <label for="monthpicker">Choose a month: </label>
                                 <div class="input-group">
-                                    <input id="monthpicker" class="form-control" type="text" readonly>
-                                    <label class="input-group-addon btn" for="monthpicker">
+                                    <input class="form-control" uib-datepicker-popup="yyyy.MM" datepicker-mode="'month'" min-mode="'month'" is-open="status.monthPickerOpened" ng-model="statementMonth" ng-change="monthChanged()" ng-click="openMonthPicker($event)" readonly>
+                                    <label class="input-group-addon btn" ng-click="openMonthPicker($event)">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </label>
                                 </div> <!-- .input-group -->
-                            </form>
+                            </div> <!-- .form-inline -->
                         </div> <!-- .text-center -->
                     </div> <!-- .panel-body -->
-                    <table class="table table-striped table-hover table-condensed table-responsive">
+
+                    <table class="table table-striped table-hover table-condensed table-responsive" ng-cloak>
                         <thead class="thead thead-inverse">
                         <tr>
                             <th>Category</th>
@@ -35,15 +36,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr><td>Food</td>           <td>1234</td></tr>
-                            <tr><td>Medical</td>        <td>567</td></tr>
-                            <tr><td>Entertainment</td>  <td>8910</td></tr>
-                            <tr><td>Other</td>          <td>111213</td></tr>
+                            <tr ng-repeat="statement in statements">
+                                <td>{{ statement.category }}</td>
+                                <td>{{ statement.sum }}</td>
+                            </tr>
                         </tbody>
                     </table>
-                    <div class="panel-footer">
+
+                    <div class="panel-footer" ng-cloak>
                         <div class="text-center">
-                            <b>Total amount of spending: 121924</b>
+                            <b>Total amount of spending: {{ total_amount }}</b>
                         </div> <!-- .text-center -->
                     </div> <!-- .panel-footer -->
                 </div> <!-- .panel .panel-default -->
@@ -51,20 +53,9 @@
         </div> <!-- .row -->
     </div> <!-- .container --->
 
-    <script type="text/javascript" src="public/components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="public/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript">
-        $("document").ready(function() {
-            var monthPicker = $('#monthpicker');
-            monthPicker.datepicker({
-                autoclose: true,
-                format: "yyyy.mm",
-                orientation: 'auto top',
-                viewMode: "months",
-                minViewMode: "months"
-            });
-            monthPicker.datepicker("setDate", new Date());
-        });
-    </script>
+    <script type="text/javascript" src="public/components/angular/angular.js"></script>
+    <script type="text/javascript" src="public/components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="public/components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="public/js/statements.js"></script>
 </body>
 </html>

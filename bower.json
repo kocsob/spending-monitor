@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.5",
-    "bootstrap-datepicker": "~1.4.1",
-    "angular": "~1.4.7"
+    "angular": "~1.4.7",
+    "angular-bootstrap": "~0.14.3"
   }
 }
