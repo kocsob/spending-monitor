@@ -38,3 +38,7 @@ div .graph-image {
 .table .btn-group {
     float: right;
 }
+
+.table .input-group-addon {
+    width: auto;
+}
