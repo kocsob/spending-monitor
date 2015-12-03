@@ -14,6 +14,8 @@ angular.module('spendingsApp', ['ui.bootstrap'])
             "Food",
             "Entertainment",
             "Medical",
+            "Living",
+            "Beauty",
             "Other"
         ];
 
