@@ -16,10 +16,15 @@ module.exports = function (objectRepository) {
         // Delete spending from the DB
         spendingModel.remove({
             _id: req.body._id
-        }, function (err) {
+        }, function (err, numAffected) {
             if (err) {
-                next(err);
+                return next(err);
             }
+
+            if (numAffected === 0) {
+                return res.status(400).send('0 rows deleted');
+            }
+
             return res.status(200).end();
         });
     };

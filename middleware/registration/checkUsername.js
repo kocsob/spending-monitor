@@ -23,7 +23,7 @@ module.exports = function (objectRepository) {
             username: username
         }, function (err, result) {
             if (err) {
-                next(err);
+                return next(err);
             }
 
             // Check username existence

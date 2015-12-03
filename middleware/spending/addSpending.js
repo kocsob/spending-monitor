@@ -9,9 +9,20 @@ module.exports = function (objectRepository) {
 
     return function (req, res, next) {
         // Check the required attributes
-        if (typeof req.body.date === 'undefined' || typeof req.body.item === 'undefined' ||
-            typeof req.body.category === 'undefined' || typeof req.body.amount === 'undefined') {
-            return res.status(400).end();
+        if (typeof req.body.date === 'undefined' || !req.body.date) {
+            return res.status(400).send('Date field is not filled out!');
+        }
+
+        if (typeof req.body.item === 'undefined' || !req.body.item) {
+            return res.status(400).send('Item field is not filled out!');
+        }
+
+        if (typeof req.body.category === 'undefined' || !req.body.category) {
+            return res.status(400).send('Category field is not filled out!');
+        }
+
+        if (typeof req.body.amount === 'undefined' || !req.body.amount) {
+            return res.status(400).send('Amount field is not filled out!');
         }
 
         // Add the new spending to the DB
@@ -24,7 +35,7 @@ module.exports = function (objectRepository) {
         });
         spending.save(function(err, spending) {
             if (err) {
-                next(err);
+                return next(err);
             }
 
             return res.json({ _id: spending._id });

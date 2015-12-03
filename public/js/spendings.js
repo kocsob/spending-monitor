@@ -5,6 +5,11 @@ angular.module('spendingsApp', ['ui.bootstrap'])
     }])
 
     .controller('spendingsCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.alerts = [];
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
+
         $scope.spendingCategories = [
             "Food",
             "Entertainment",
@@ -32,17 +37,16 @@ angular.module('spendingsApp', ['ui.bootstrap'])
 
         function getSpending() {
             var date = $scope.spendingMonth;
-            var from = new Date(date.getFullYear(), date.getMonth());
-            var to = new Date(date.getFullYear(), date.getMonth() + 1);
+            var params = {
+                from: new Date(date.getFullYear(), date.getMonth()),
+                to: new Date(date.getFullYear(), date.getMonth() + 1)
+            };
 
-            $http.get('/spendings/get', {
-                params: {
-                    from: from,
-                    to: to
-                }
-            }).success(function(result) {
-                $scope.spendings = result;
-                $scope.total_amount = totalAmount(result);
+            $http.get('/spendings/get', { params: params }).then(function successCallback (result) {
+                $scope.spendings = result.data;
+                $scope.total_amount = totalAmount(result.data);
+            }, function errorCallback (result) {
+                $scope.alerts.push({ type: 'danger', msg: result.data || result.statusText || 'Service unavailable!' });
             });
         }
 
@@ -54,9 +58,11 @@ angular.module('spendingsApp', ['ui.bootstrap'])
                 item: $scope.addSpendingData.item
             };
 
-            $http.post('/spendings/add', data).success(function (result) {
+            $http.post('/spendings/add', data).then(function successCallback (result) {
                 getSpending();
-            });
+            }, function errorCallback (result) {
+                $scope.alerts.push({ type: 'danger', msg: result.data || result.statusText || 'Service unavailable!' });
+            })
         };
 
         $scope.modifySpending = function (spending) {
@@ -72,10 +78,12 @@ angular.module('spendingsApp', ['ui.bootstrap'])
                 item: $scope.modifySpendingData.item
             };
 
-            $http.post('/spendings/modify', data).success(function (result) {
+            $http.post('/spendings/modify', data).then(function successCallback (result) {
                 getSpending();
                 $scope.modifySpendingData = {};
-            });
+            }, function errorCallback (result) {
+                $scope.alerts.push({ type: 'danger', msg: result.data || result.statusText || 'Service unavailable!' });
+            })
         };
 
         $scope.cancelModifying = function () {
@@ -84,10 +92,14 @@ angular.module('spendingsApp', ['ui.bootstrap'])
         };
 
         $scope.deleteSpending = function (spending) {
-            $http.post('/spendings/delete', {_id: spending._id}).success(function () {
+            var data = {_id: spending._id};
+            $http.post('/spendings/delete', data).then(function successCallback (result) {
                 $scope.spendings.splice($scope.spendings.indexOf(spending),1);
                 $scope.total_amount = totalAmount($scope.spendings);
-            });
+            }, function errorCallback (result) {
+                console.log(result);
+                $scope.alerts.push({ type: 'danger', msg: result.data || result.statusText || 'Service unavailable!' });
+            })
         };
 
         $scope.openAddSpendingDatePicker = function($event) {

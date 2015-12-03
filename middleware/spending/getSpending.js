@@ -12,7 +12,7 @@ module.exports = function (objectRepository) {
         var from = req.query.from || 0;
         var to = req.query.to || Date.now();
 
-        // Find the spendigns in the date interval
+        // Find the spendings in the date interval
         spendingModel.find({
             _owner: req.session.userId,
             date: {

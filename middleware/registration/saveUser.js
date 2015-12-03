@@ -32,7 +32,7 @@ module.exports = function (objectRepository) {
         });
         user.save(function (err) {
             if (err) {
-                next(err);
+                return next(err);
             }
 
             // Registration succeeded and fill the login name
