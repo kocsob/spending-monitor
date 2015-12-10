@@ -15,7 +15,8 @@ module.exports = function (objectRepository) {
 
         // Delete spending from the DB
         spendingModel.remove({
-            _id: req.body._id
+            _id: req.body._id,
+            _owner: req.session.userId
         }, function (err, numAffected) {
             if (err) {
                 return next(err);
