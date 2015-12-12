@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var deleteSpendingMW = require('../../../../middleware/spending/deleteSpending');
+var deleteSpendingMW = require('../../../middleware/spending/deleteSpending');
 
 describe('deleteSpending middleware', function () {
     it('should return status code 200', function (done) {

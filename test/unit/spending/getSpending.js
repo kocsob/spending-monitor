@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var getSpendingMW = require('../../../../middleware/spending/getSpending');
+var getSpendingMW = require('../../../middleware/spending/getSpending');
 
 describe('getSpending middleware', function () {
     it('should return the spending in JSON', function (done) {
@@ -51,4 +51,5 @@ describe('getSpending middleware', function () {
             done();
         });
     });
+
 });
