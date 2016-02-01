@@ -13,25 +13,18 @@ module.exports = function (objectRepository) {
         var to = req.query.to || Date.now();
 
         // Find the spendings in the date interval
-        spendingModel.find({
-            _owner: req.session.userId,
-            date: {
-                $gte: from,
-                $lt: to
+        spendingModel.findAll({
+            where: {
+                owner: req.session.userId,
+                date: {
+                    $gte: from,
+                    $lt: to
+                }
             }
-        }).select({
-            _id: 1,
-            date: 1,
-            item: 1,
-            category: 1,
-            amount: 1
-        }).exec(function (err, result){
-            if (err){
-                return next(err);
-            }
+        }).then(function (spending){
+            return res.json(spending);
+        }).catch(next);
 
-            return res.json(result);
-        });
     };
 
 };

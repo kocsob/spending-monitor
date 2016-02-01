@@ -73,7 +73,7 @@ angular.module('spendingsApp', ['ui.bootstrap'])
 
         $scope.saveModifying = function () {
             var data = {
-                _id: $scope.modifySpendingData._id,
+                id: $scope.modifySpendingData.id,
                 amount: $scope.modifySpendingData.amount,
                 category: $scope.modifySpendingData.category,
                 date: $scope.modifySpendingData.date,
@@ -94,7 +94,7 @@ angular.module('spendingsApp', ['ui.bootstrap'])
         };
 
         $scope.deleteSpending = function (spending) {
-            var data = {_id: spending._id};
+            var data = {id: spending.id};
             $http.post('/spendings/delete', data).then(function successCallback (result) {
                 $scope.spendings.splice($scope.spendings.indexOf(spending),1);
                 $scope.total_amount = totalAmount($scope.spendings);

@@ -1,15 +1,12 @@
 //Middlewares
 var indexRedirectMW = require('../middleware/general/indexRedirect');
-
-//Models
-var userModel = require('../models/user');
-var spendingModel = require('../models/spending');
+var models = require('../models');
 
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: models.User,
+        spendingModel: models.Spending
     };
 
     app.get('/',

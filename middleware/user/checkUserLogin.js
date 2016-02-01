@@ -29,32 +29,28 @@ module.exports = function (objectRepository) {
         }
 
         // Find user by username in the DB
-        userModel.findOne({
-            username: username
-        }, function (err, result) {
-            if (err) {
-                next(err);
-            }
-
+        userModel.find({
+            where: { username: username }
+        }).then(function (user) {
             // Check username existence in the DB
-            if (!result) {
+            if (!user) {
                 res.tpl.error.login = "Username or Password is incorrect!";
                 res.tpl.loginname = username;
                 return next();
             }
 
             // Check password
-            if (!bcrypt.compareSync(password, result.password)) {
+            if (!bcrypt.compareSync(password, user.password)) {
                 res.tpl.error.login = "Username or Password is incorrect!";
                 res.tpl.loginname = username;
                 return next();
             }
 
             // Save the user ID to the session
-            req.session.userId = result._id;
+            req.session.userId = user.id;
 
             return res.redirect('/spendings');
-        });
+        }).catch(next);
     };
 
 };

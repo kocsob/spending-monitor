@@ -11,8 +11,8 @@ module.exports = function (objectRepository) {
         var data = {};
 
         // Check the _id if not exists send Bad Request
-        if (typeof req.body._id === 'undefined' || !req.body._id) {
-            return res.status(400).send('_id field is not specified!');
+        if (typeof req.body.id === 'undefined' || !req.body.id) {
+            return res.status(400).send('id field is not specified!');
         }
 
         // Collect the update information
@@ -35,21 +35,19 @@ module.exports = function (objectRepository) {
         }
 
         // Update information in the DB
-        spendingModel.update({
-            _id: req.body._id
-        }, {
-            $set: data
-        }, function(err, numAffected) {
-            if (err) {
-                return next(err);
+        spendingModel.update(data, {
+            where: {
+                id : req.body.id,
+                owner: req.session.userId
             }
-
-            if (numAffected === 0) {
+        }).then(function (affectedRows) {
+            if (affectedRows[0] === 0) {
                 return res.status(400).send('0 rows modified');
             }
 
             res.status(200).end();
-        });
+        }).catch(next);
+
     };
 
 };

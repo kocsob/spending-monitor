@@ -1,15 +1,27 @@
-db = require('../config/db');
-
 /**
  * Spending model
- * @constructor
  */
-var Spending = db.model('Spending', {
-    date: Date,
-    item: String,
-    category: String,
-    amount: Number,
-    _owner: { type: db.Schema.Types.ObjectId, ref: 'User' }
-});
+module.exports = function(sequelize, DataTypes) {
+    var Spending = sequelize.define("Spending", {
+        id: {
+            primaryKey: true,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4
+        },
+        date: DataTypes.DATE,
+        item: DataTypes.STRING,
+        category: DataTypes.STRING,
+        amount: DataTypes.INTEGER
+    }/* ,{
+        classMethods: {
+            associate: function(models) {
+                Spending.hasOne(models.User, {
+                    foreignKey: 'id',
+                    allowNull: false
+                });
+            }
+        }
+    }*/);
 
-module.exports = Spending;
+    return Spending;
+};

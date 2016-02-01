@@ -4,11 +4,12 @@ var getSpendingMW = require('../../../middleware/spending/getSpending');
 describe('getSpending middleware', function () {
     it('should return the spending in JSON', function (done) {
         var spendings = "spendings";
-        var spendingModelMock = function () {};
-        spendingModelMock.prototype.find = function () { return this; };
-        spendingModelMock.prototype.select = function () { return this; };
-        spendingModelMock.prototype.exec = function (cb) {
-            cb(undefined, spendings);
+        var spendingModelMock = {
+            findAll: function (data) {
+                return new Promise(function (resolve, reject) {
+                    resolve(spendings);
+                })
+            }
         };
 
         var req = {
@@ -22,7 +23,7 @@ describe('getSpending middleware', function () {
             }
         };
         var objectRepository = {
-            spendingModel: new spendingModelMock()
+            spendingModel: spendingModelMock
         };
 
         getSpendingMW(objectRepository)(req, res, function (err) {
@@ -30,11 +31,12 @@ describe('getSpending middleware', function () {
     });
 
     it('should call the error handler if the database has error', function (done) {
-        var spendingModelMock = function () {};
-        spendingModelMock.prototype.find = function () { return this; };
-        spendingModelMock.prototype.select = function () { return this; };
-        spendingModelMock.prototype.exec = function (cb) {
-            cb("error", undefined);
+        var spendingModelMock = {
+            findAll: function (data) {
+                return new Promise(function (resolve, reject) {
+                    reject("error");
+                })
+            }
         };
 
         var req = {
@@ -43,7 +45,7 @@ describe('getSpending middleware', function () {
         };
         var res = {};
         var objectRepository = {
-            spendingModel: new spendingModelMock()
+            spendingModel: spendingModelMock
         };
 
         getSpendingMW(objectRepository)(req, res, function (err) {

@@ -19,20 +19,16 @@ module.exports = function (objectRepository) {
         }
 
         // Find user by username in the DB
-        userModel.findOne({
-            username: username
-        }, function (err, result) {
-            if (err) {
-                return next(err);
-            }
-
+        userModel.find({
+            where: { username: username }
+        }).then(function (user) {
             // Check username existence
-            if (result) {
+            if (user) {
                 res.error.username = "Username is already used.";
                 return next();
             }
             return next();
-        });
+        }).catch(next);
     };
 
 };

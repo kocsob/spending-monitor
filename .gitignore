@@ -31,3 +31,6 @@ node_modules
 
 #Public components
 public/components
+
+#SQLite
+*.sqlite

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var Sequelize = require('sequelize');
 var requireOption = require('../common').requireOption;
 
 /**
@@ -14,34 +14,23 @@ module.exports = function (objectRepository) {
         var to = req.query.to || Date.now();
 
         // Create the aggregation in the date interval
-        spendingModel.aggregate([
-            {
-                $match: {
-                    _owner: mongoose.Types.ObjectId(req.session.userId),
-                    date: {
-                        $gt: new Date(from),
-                        $lt: new Date(to)
-                    }
-                }
-            }, {
-                $group: {
-                    _id: "$category",
-                    sum: {$sum: "$amount"}
+        spendingModel.findAll({
+            attributes: [
+                [Sequelize.fn('SUM', Sequelize.col('amount')),'sum'],
+                'category'
+            ],
+            group: ['category'],
+            where: {
+                owner: req.session.userId,
+                date: {
+                    $gte: from,
+                    $lt: to
                 }
             }
-        ], function (err, result){
-            if (err){
-                return next(err);
-            }
+        }).then(function (statement){
+            return res.json(statement);
+        }).catch(next);
 
-            // Replace the _id field with category
-            result.forEach(function (element) {
-                element.category = element._id;
-                delete element._id;
-            });
-
-            return res.json(result);
-        });
     };
 
 };

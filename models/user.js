@@ -1,13 +1,26 @@
-db = require('../config/db');
-
 /**
  * User model
- * @constructor
  */
-var User = db.model('User', {
-    username: String,
-    email: String,
-    password: String
-});
+module.exports = function(sequelize, DataTypes) {
+    var User = sequelize.define("User", {
+        id: {
+            primaryKey: true,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4
+        },
+        username: DataTypes.STRING,
+        email: DataTypes.STRING,
+        password: DataTypes.STRING
+    } ,{
+        classMethods: {
+            associate: function(models) {
+                User.hasMany(models.Spending, {
+                    foreignKey: 'owner',
+                    allowNull: false
+                });
+            }
+        }
+    });
 
-module.exports = User;
+    return User;
+};

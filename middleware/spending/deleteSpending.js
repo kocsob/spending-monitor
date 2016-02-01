@@ -9,25 +9,24 @@ module.exports = function (objectRepository) {
 
     return function (req, res, next) {
         // Check the _id if not exists send Bad Request
-        if (typeof req.body._id === 'undefined') {
+        if (typeof req.body.id === 'undefined') {
             return res.status(400).end();
         }
 
         // Delete spending from the DB
-        spendingModel.remove({
-            _id: req.body._id,
-            _owner: req.session.userId
-        }, function (err, numAffected) {
-            if (err) {
-                return next(err);
+        spendingModel.destroy({
+            where: {
+                id : req.body.id,
+                owner: req.session.userId
             }
-
-            if (numAffected === 0) {
-                return res.status(400).send('0 rows deleted');
+        }).then(function (affectedRows) {
+            if (affectedRows[0] === 0) {
+                return res.status(400).send('0 rows modified');
             }
 
             return res.status(200).end();
-        });
+        }).catch(next);
+
     };
 
 };

@@ -6,16 +6,13 @@ var getSpendingMW = require('../middleware/spending/getSpending');
 var addSpendingMW = require('../middleware/spending/addSpending');
 var modifySpendingMW = require('../middleware/spending/modifySpending');
 var deleteSpendingMW = require('../middleware/spending/deleteSpending');
-
-//Models
-var userModel = require('../models/user');
-var spendingModel = require('../models/spending');
+var models = require('../models');
 
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: models.User,
+        spendingModel: models.Spending
     };
 
     app.get('/spendings',

@@ -8,14 +8,12 @@ module.exports = function (objectRepository) {
     var userModel = requireOption(objectRepository, 'userModel');
 
     return function (req, res, next) {
-        userModel.findOne({ _id : req.session.userId }, function (err, result){
-            if (err){
-                return next(err);
-            }
-
-            res.tpl.user = result;
+        userModel.find({
+            where: {id: req.session.userId}
+        }).then(function (user){
+            res.tpl.user = user;
             return next();
-        });
+        }).catch(next);
     };
 
 };

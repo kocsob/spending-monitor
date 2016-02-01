@@ -70,13 +70,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="spending in spendings track by spending._id">
+                    <tr ng-repeat="spending in spendings track by spending.id">
                         <!-- simple row templating -->
-                        <td ng-if="modifySpendingData._id !== spending._id">{{ spending.date | date:'yyyy.MM.dd'}}</td>
-                        <td ng-if="modifySpendingData._id !== spending._id">{{ spending.item }}</td>
-                        <td ng-if="modifySpendingData._id !== spending._id">{{ spending.category }}</td>
-                        <td ng-if="modifySpendingData._id !== spending._id">{{ spending.amount }}</td>
-                        <td ng-if="modifySpendingData._id !== spending._id">
+                        <td ng-if="modifySpendingData.id !== spending.id">{{ spending.date | date:'yyyy.MM.dd'}}</td>
+                        <td ng-if="modifySpendingData.id !== spending.id">{{ spending.item }}</td>
+                        <td ng-if="modifySpendingData.id !== spending.id">{{ spending.category }}</td>
+                        <td ng-if="modifySpendingData.id !== spending.id">{{ spending.amount }}</td>
+                        <td ng-if="modifySpendingData.id !== spending.id">
                             <div class="btn-group" role="group">
                                 <button class="btn btn-sm btn-default" ng-click="modifySpending(spending)">
                                     <span class="glyphicon glyphicon-pencil"></span>
@@ -88,7 +88,7 @@
                         </td>
 
                         <!-- editable row templating -->
-                        <td ng-if="modifySpendingData._id === spending._id">
+                        <td ng-if="modifySpendingData.id === spending.id">
                             <div class="input-group">
                                 <input class="form-control" uib-datepicker-popup="yyyy.MM.dd" is-open="datapickerOpened.modifySpending" ng-model="modifySpendingData.date" ng-click="openModifySpendingDatePicker($event)" readonly />
                                 <label class="input-group-addon btn" ng-click="openModifySpendingDatePicker($event)">
@@ -96,16 +96,16 @@
                                 </label>
                             </div> <!-- .input-group -->
                         </td>
-                        <td ng-if="modifySpendingData._id === spending._id">
+                        <td ng-if="modifySpendingData.id === spending.id">
                             <input class="form-control" ng-model="modifySpendingData.item" type="text" placeholder="Modify item" />
                         </td>
-                        <td ng-if="modifySpendingData._id === spending._id">
+                        <td ng-if="modifySpendingData.id === spending.id">
                             <select class="form-control" ng-model="modifySpendingData.category" ng-options="category as category for category in spendingCategories"></select>
                         </td>
-                        <td ng-if="modifySpendingData._id === spending._id">
+                        <td ng-if="modifySpendingData.id === spending.id">
                             <input class="form-control" ng-model="modifySpendingData.amount" type="number" placeholder="Amount" />
                         </td>
-                        <td ng-if="modifySpendingData._id === spending._id">
+                        <td ng-if="modifySpendingData.id === spending.id">
                             <div class="btn-group" role="group">
                                 <button class="btn btn-sm btn-default" ng-click="saveModifying()">
                                     <span class="glyphicon glyphicon-ok"></span>

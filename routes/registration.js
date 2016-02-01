@@ -5,16 +5,13 @@ var checkEmailMW = require('../middleware/registration/checkEmail');
 var checkPasswordMW = require('../middleware/registration/checkPassword');
 var saveUserMW = require('../middleware/registration/saveUser');
 var renderMW = require('../middleware/general/render');
-
-//Models
-var userModel = require('../models/user');
-var spendingModel = require('../models/spending');
+var models = require('../models');
 
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: models.User,
+        spendingModel: models.Spending
     };
 
     app.post('/registration',

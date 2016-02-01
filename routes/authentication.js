@@ -4,16 +4,13 @@ var authMW = require('../middleware/authentication/logout');
 var inverseAuthMW = require('../middleware/authentication/inverseAuth');
 var checkUserLoginMW = require('../middleware/user/checkUserLogin');
 var logoutMW = require('../middleware/authentication/logout');
-
-//Models
-var userModel = require('../models/user');
-var spendingModel = require('../models/spending');
+var models = require('../models');
 
 module.exports = function (app) {
 
     var objectRepository = {
-        userModel: userModel,
-        spendingModel: spendingModel
+        userModel: models.User,
+        spendingModel: models.Spending
     };
 
     app.get('/login',

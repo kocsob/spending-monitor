@@ -26,20 +26,16 @@ module.exports = function (objectRepository) {
         }
 
         // Add the new spending to the DB
-        var spending = new spendingModel({
+        spendingModel.create({
             date: req.body.date,
             item: req.body.item,
             category: req.body.category,
             amount: req.body.amount,
-            _owner: req.session.userId
-        });
-        spending.save(function(err, spending) {
-            if (err) {
-                return next(err);
-            }
+            owner: req.session.userId
+        }).then(function (spending) {
+            return res.json({ id: spending.id });
+        }).catch(next);
 
-            return res.json({ _id: spending._id });
-        });
     };
 
 };

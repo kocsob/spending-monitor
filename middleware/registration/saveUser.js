@@ -25,22 +25,17 @@ module.exports = function (objectRepository) {
 
         // Save the new user
         var hash = bcrypt.hashSync(password, 10);
-        var user = new userModel({
+        userModel.create({
             username: username,
             email: email,
             password: hash
-        });
-        user.save(function (err) {
-            if (err) {
-                return next(err);
-            }
-
+        }).then(function (user) {
             // Registration succeeded and fill the login name
             res.tpl.success = true;
             res.tpl.loginname = username;
 
             return next();
-        });
+        }).catch(next);
     };
 
 };

@@ -4,13 +4,15 @@ var deleteSpendingMW = require('../../../middleware/spending/deleteSpending');
 describe('deleteSpending middleware', function () {
     it('should return status code 200', function (done) {
         var spendingModelMock = {
-            remove: function (data, cb) {
-                cb(undefined, 1)
+            destroy: function (data) {
+                return new Promise(function (resolve, reject) {
+                    resolve([ 1 ]);
+                })
             }
         };
 
         var req = {
-            body: { _id: 1},
+            body: { id: 1},
             session: { userId: 1 }
         };
         var res = {
@@ -33,13 +35,15 @@ describe('deleteSpending middleware', function () {
 
     it('should return status code 400 if no rows affected', function (done) {
         var spendingModelMock = {
-            remove: function (data, cb) {
-                cb(undefined, 0)
+            destroy: function (data) {
+                return new Promise(function (resolve, reject) {
+                    resolve([ 0 ]);
+                })
             }
         };
 
         var req = {
-            body: {_id: 1},
+            body: {id: 1},
             session: {userId: 1}
         };
         var res = {
@@ -62,13 +66,15 @@ describe('deleteSpending middleware', function () {
 
     it('should call the error handler if the database has error', function (done) {
         var spendingModelMock = {
-            remove: function (data, cb) {
-                cb("error", 0)
+            destroy: function (data) {
+                return new Promise(function (resolve, reject) {
+                    reject("error");
+                })
             }
         };
 
         var req = {
-            body: {_id: 1},
+            body: {id: 1},
             session: {userId: 1}
         };
         var res = {};
@@ -82,9 +88,9 @@ describe('deleteSpending middleware', function () {
         })
     });
 
-    it('should return status code 400 if _id does not specified in the reqest body', function (done) {
+    it('should return status code 400 if id does not specified in the reqest body', function (done) {
         var req = {
-            body: {_id: undefined}
+            body: {id: undefined}
         };
         var res = {
             status: function (result) {
