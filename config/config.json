@@ -1,7 +1,7 @@
 {
     "development": {
         "dialect": "sqlite",
-        "storage": "./spending_monitor.sqlite",
+        "storage": "./db/spending_monitor.sqlite",
         "logging": false
     },
     "test": {
