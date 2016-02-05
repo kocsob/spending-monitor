@@ -26,7 +26,8 @@ module.exports = function (objectRepository) {
                     $gte: from,
                     $lt: to
                 }
-            }
+            },
+            order: 'category ASC'
         }).then(function (statement){
             return res.json(statement);
         }).catch(next);

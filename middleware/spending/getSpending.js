@@ -20,7 +20,8 @@ module.exports = function (objectRepository) {
                     $gte: from,
                     $lt: to
                 }
-            }
+            },
+            order: 'date ASC'
         }).then(function (spending){
             return res.json(spending);
         }).catch(next);
