@@ -12,10 +12,12 @@ angular.module('spendingsApp', ['ui.bootstrap'])
 
         $scope.spendingCategories = [
             "Food",
-            "Entertainment",
-            "Medical",
             "Living",
+            "Entertainment",
+            "Clothes",
+            "Medical",
             "Beauty",
+            "Gift",
             "Other"
         ];
 
